@@ -1,8 +1,13 @@
 # Dockerfile for bindgen, used for automated testing on travis-ci.org
 
-FROM base/devel
+FROM archlinux:base-devel
 
-COPY . /
+COPY . /bindgen
 
-RUN pacman -Syu --noconfirm llvm clang crystal shards gc libyaml
-RUN make -C clang
+RUN pacman -Syu --noconfirm cmake llvm clang crystal shards libyaml
+
+ENV BINDGEN_DYNAMIC=1
+
+WORKDIR /bindgen/clang
+RUN cmake . && make
+WORKDIR /bindgen
