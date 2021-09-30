@@ -1,8 +1,7 @@
 # Dockerfile for bindgen, used for automated testing on travis-ci.org
 
-FROM debian:stretch
-ARG CLANG_VERSION=10
-ARG DISTRIB_CODENAME=stretch
+FROM debian:bullseye
+ARG DISTRIB_CODENAME=bullseye
 
 COPY . /bindgen
 

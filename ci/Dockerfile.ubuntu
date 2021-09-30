@@ -1,7 +1,6 @@
 # Dockerfile for bindgen, used for automated testing on travis-ci.org
 
 FROM ubuntu:focal
-ARG CLANG_VERSION=10
 ARG DISTRIB_CODENAME=focal
 
 COPY . /bindgen
