@@ -1,7 +1,7 @@
 # Dockerfile for bindgen, used for automated testing on travis-ci.org
 
-FROM ubuntu:focal
 ARG DISTRIB_CODENAME=focal
+FROM ubuntu:${DISTRIB_CODENAME}
 
 COPY . /bindgen
 

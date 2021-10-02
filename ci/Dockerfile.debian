@@ -1,7 +1,7 @@
 # Dockerfile for bindgen, used for automated testing on travis-ci.org
 
-FROM debian:bullseye
 ARG DISTRIB_CODENAME=bullseye
+FROM debian:${DISTRIB_CODENAME}
 
 COPY . /bindgen
 

@@ -6,10 +6,14 @@ services:
 
 matrix:
   include:
-    - install: # Ubuntu 20.04 (Xenial)
-      - docker build . -f ci/Dockerfile.ubuntu -t bindgen-test
+    - install: # Ubuntu 18.04 (Bionic)
+      - docker build . -f ci/Dockerfile.ubuntu -t bindgen-test --build-arg bionic
+    - install: # Ubuntu 20.04 (Focal)
+      - docker build . -f ci/Dockerfile.ubuntu -t bindgen-test --build-arg focal
+    - install: # Debian 10.0 (Buster)
+      - docker build . -f ci/Dockerfile.debian -t bindgen-test --build-arg buster
     - install: # Debian 11.0 (Bullseye)
-      - docker build . -f ci/Dockerfile.debian -t bindgen-test
+      - docker build . -f ci/Dockerfile.debian -t bindgen-test --build-arg bullseye
     - install: # ArchLinux (Rolling)
       - docker build . -f ci/Dockerfile.archlinux -t bindgen-test
 
