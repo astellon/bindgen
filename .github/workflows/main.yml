@@ -8,8 +8,9 @@ on:
 
 jobs:
 
-  build:
+  CI:
     strategy:
+      fail-fast: false
       matrix:
         llvm_version: [11, 12, 13, 14]
         channel: [stable, nightly]
