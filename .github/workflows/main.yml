@@ -24,7 +24,8 @@ jobs:
       run: >
         docker build . --file ci/llvm.dockerfile
         --tag bindgen-test:${{ matrix.llvm_version }}-${{ matrix.channel }}
-        --build-arg LLVM_VERSION=${{ matrix.llvm_version }} CRYSTAL_CHANNEL=${{ matrix.channel }}
+        --build-arg LLVM_VERSION=${{ matrix.llvm_version }}
+        --build-arg CRYSTAL_CHANNEL=${{ matrix.channel }}
 
     - name: Run test
       run: docker run --rm bindgen-test:${{ matrix.llvm_version }}-${{ matrix.channel }} ci/run.sh
