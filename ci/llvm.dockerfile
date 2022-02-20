@@ -6,7 +6,7 @@ FROM debian:${DEBIAN_CODENAME}
 
 ARG DEBIAN_CODENAME
 ARG CRYSTAL_VERSION=latest
-ARG CRYSTAL_CHANNEL=nightly
+ARG CRYSTAL_CHANNEL=stable
 ARG LLVM_VERSION=11
 
 RUN apt-get update && apt-get install --yes curl tzdata gnupg
