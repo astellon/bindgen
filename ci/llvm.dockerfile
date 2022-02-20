@@ -16,17 +16,15 @@ RUN echo deb http://apt.llvm.org/${DEBIAN_CODENAME}/ llvm-toolchain-${DEBIAN_COD
     echo deb-src http://apt.llvm.org/${DEBIAN_CODENAME}/ llvm-toolchain-${DEBIAN_CODENAME}-${LLVM_VERSION} main >> /etc/apt/sources.list && \
     curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
 
-# add crystal
+# add crystal (internally do apt-get crystal${CRYSTAL_VERSION})
 RUN curl -fsSL https://crystal-lang.org/install.sh | bash -s -- --version=${CRYSTAL_VERSION} --channel=${CRYSTAL_CHANNEL}
 
 RUN apt-get update && \
     apt-get install --yes \
     build-essential git \
-    crystal libxml2-dev zlib1g-dev libncurses-dev libgc-dev libyaml-dev \
+    libxml2-dev zlib1g-dev libncurses-dev libgc-dev libyaml-dev \
     llvm-${LLVM_VERSION} llvm-${LLVM_VERSION}-dev clang-${LLVM_VERSION} libclang-${LLVM_VERSION}-dev \
     libpcre3-dev cmake libedit-dev
-
-RUN crystal version
 
 COPY . /bindgen
 

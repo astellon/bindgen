@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         llvm_version: [11, 12, 13, 14]
-        channel: [stable, nightly]
+        crystal_version: [1.1, 1.2, 1.3]
 
     runs-on: ubuntu-latest
 
@@ -26,7 +26,7 @@ jobs:
         docker build . --file ci/llvm.dockerfile
         --tag bindgen-test:${{ matrix.llvm_version }}-${{ matrix.channel }}
         --build-arg LLVM_VERSION=${{ matrix.llvm_version }}
-        --build-arg CRYSTAL_CHANNEL=${{ matrix.channel }}
+        --build-arg CRYSTAL_VERSION=${{ matrix.crystal_version }}
 
     - name: Run test
-      run: docker run --rm bindgen-test:${{ matrix.llvm_version }}-${{ matrix.channel }} ci/run.sh
+      run: docker run --rm bindgen-test:${{ matrix.llvm_version }}-${{ matrix.crystal_version }} ci/run.sh
