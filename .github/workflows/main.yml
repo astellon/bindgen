@@ -9,6 +9,10 @@ on:
 jobs:
 
   build:
+    strategy:
+      matrix:
+        llvm_version: [11, 12, 13, 14]
+        channel: [stable, nightly]
 
     runs-on: ubuntu-latest
 
@@ -17,7 +21,10 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Build the Docker image
-      run: docker build . --file ci/llvm.dockerfile --tag bindgen-test:$(date +%s)
+      run: >
+        docker build . --file ci/llvm.dockerfile
+        --tag bindgen-test:${{ matrix.llvm_version }}-${{ matrix.channel }}
+        --build-arg LLVM_VERSION=${{ matrix.llvm_version }} CRYSTAL_CHANNEL=${{ matrix.channel }}
 
     - name: Run test
-      run: docker run --rm bindgen-test ci/run.sh
+      run: docker run --rm bindgen-test:${{ matrix.llvm_version }}-${{ matrix.channel }} ci/run.sh
